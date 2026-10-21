@@ -1,0 +1,58 @@
+/* Barras de título y pestañas: mismo negro que la terminal, con un filo sutil */
+headerbar,
+.titlebar {
+  background-color: #0a0a0a;
+  background-image: none;
+  color: #f2f2f2;
+  box-shadow: none;
+  border-bottom: 1px solid #1f1f1f;
+}
+
+headerbar:backdrop {
+  background-color: #0a0a0a;
+  color: #5a5a5a;
+}
+
+headerbar .title,
+headerbar windowtitle label {
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+/* Botones de ventana y de la barra */
+headerbar button {
+  border-radius: 8px;
+  color: #e0e0e0;
+}
+
+headerbar button:hover {
+  background-color: #1a1a1a;
+}
+
+headerbar button:active,
+headerbar button:checked {
+  background-color: rgba(213, 0, 249, 0.22);
+  color: #ea80fc;
+}
+
+headerbar windowcontrols button.close:hover {
+  background-color: #ff3b30;
+  color: #ffffff;
+}
+
+/* Pestañas */
+tabbar,
+tabbar > revealer > box {
+  background-color: #0a0a0a;
+  border-bottom: 1px solid #1f1f1f;
+}
+
+tabbar tab {
+  border-radius: 8px;
+  color: #5a5a5a;
+}
+
+tabbar tab:selected {
+  background-color: #1a1a1a;
+  color: #f2f2f2;
+}

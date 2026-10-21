@@ -12,7 +12,7 @@ cd "$REPO"
 
 # ---------------------------- Configuración ----------------------------
 BASE_PKGS=(bash git vim tmux ssh vscode)        # home/
-THEME_PKGS=(ptyxis starship fastfetch)     # theme/home/
+THEME_PKGS=(ptyxis starship fastfetch gtk) # theme/home/
 BASIC_STEPS=(apt fastfetch stow vimplug vscode)
 FULL_STEPS=(apt fastfetch starship font stow stow_theme vimplug dconf vscode)
 
