@@ -1,0 +1,7 @@
+# Ignorado globalmente en todos mis repos
+*.swp
+*.bak
+.vim/undo/
+a.out
+*.o
+*.d

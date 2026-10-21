@@ -1,0 +1,19 @@
+[/]
+cursor-blink-mode='on'
+cursor-shape='ibeam'
+default-columns=uint32 102
+default-profile-uuid='b782e25910a7644e9c7c051d6aa3d817'
+default-rows=uint32 26
+font-name='JetBrainsMonoNL Nerd Font Medium 12'
+interface-style='dark'
+profile-uuids=['b782e25910a7644e9c7c051d6aa3d817']
+restore-window-size=false
+use-system-font=false
+window-size=(uint32 102, uint32 26)
+
+[Profiles/b782e25910a7644e9c7c051d6aa3d817]
+bold-is-bright=false
+label='Dev1'
+login-shell=false
+opacity=0.94999999999999996
+palette='theme-edgar'

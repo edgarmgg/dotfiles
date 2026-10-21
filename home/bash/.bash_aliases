@@ -1,0 +1,6 @@
+alias update='sudo apt update && sudo apt upgrade'
+alias autoremove='sudo apt autoremove'
+alias vpnstatus='forticlient vpn status'
+alias vpnoff='forticlient vpn disconnect'
+alias g++='g++ -std=c++17 -Wall -Wextra -Wpedantic -Wshadow -Wconversion'
+alias fullcharge='sudo tlp fullcharge'

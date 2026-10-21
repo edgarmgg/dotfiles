@@ -1,0 +1,14 @@
+# Paquetes de apt (uno por línea)
+stow
+git
+vim
+curl
+unzip
+fontconfig
+chafa
+tree
+tmux
+vim-gtk3
+ripgrep
+fzf
+tlp

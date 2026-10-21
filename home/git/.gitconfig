@@ -1,0 +1,23 @@
+[user]
+	name = edgarmgg
+	email = 304910451+edgarmgg@users.noreply.github.com
+[init]
+	defaultBranch = main
+[pull]
+	rebase = true
+[push]
+	autoSetupRemote = true
+[core]
+	editor = vim
+	excludesFile = ~/.config/git/ignore
+[rerere]
+	enabled = true
+[alias]
+	st = status -sb
+	lg = log --oneline --graph --decorate
+[credential "https://github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential

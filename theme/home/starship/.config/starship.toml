@@ -1,0 +1,61 @@
+add_newline = false
+palette = 'custom'
+
+format = """$username$hostname$directory$git_branch$git_status$c$cpp$python$cmd_duration$character"""
+
+[palettes.custom]
+user = '#22c55e'
+host = '#22c55e'
+path = '#3b82f6'
+muted = '#6b7280'
+ok = '#22c55e'
+err = '#ef4444'
+
+[username]
+show_always = true
+style_user = 'bold user'
+style_root = 'bold err'
+format = '[$user]($style)'
+
+[hostname]
+ssh_only = false
+trim_at = '-'
+style = 'bold host'
+format = '[@$hostname]($style)[:](muted)'
+
+[directory]
+style = 'bold path'
+truncation_length = 3
+format = '[$path]($style)[$read_only]($read_only_style) '
+
+[git_branch]
+style = 'muted'
+format = '[on $branch]($style) '
+
+[git_status]
+style = 'muted'
+format = '([$all_status$ahead_behind]($style) )'
+
+[c]
+style = 'muted'
+format = '[$symbol($version)]($style) '
+detect_extensions = ["c"]
+
+[cpp]
+disabled = false
+style = 'muted'
+format = '[$symbol($version)]($style) '
+detect_extensions = ["cc", "cpp", "h", "hpp"]
+
+[python]
+style = 'muted'
+format = '[$symbol($version)]($style) '
+
+[cmd_duration]
+min_time = 2000
+style = 'muted'
+format = '[took $duration]($style) '
+
+[character]
+success_symbol = '[❯](bold ok)'
+error_symbol = '[❯](bold err)'

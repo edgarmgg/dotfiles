@@ -1,0 +1,10 @@
+*.bak
+*.swp
+.env
+home/ssh/.ssh/id_*
+home/ssh/.ssh/known_hosts*
+home/ssh/.ssh/authorized_keys
+*.bak.*
+*.old
+.bash_aliases.local
+home/ssh/.ssh/config.local
