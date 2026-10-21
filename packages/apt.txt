@@ -12,3 +12,4 @@ vim-gtk3
 ripgrep
 fzf
 tlp
+glow
