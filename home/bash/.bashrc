@@ -70,3 +70,31 @@ dotsync() {
     [[ $ans == [sSyY]* ]] || { echo "Cancelado (los cambios siguen en stage)"; exit 0; }
     git commit -m "${1:-Actualizar dotfiles}" && git push )
 }
+
+# Evita el aviso "Not loading module atk-bridge" de GTK (el módulo lo añade el sistema en /etc/environment.d)
+GTK_MODULES=${GTK_MODULES//atk-bridge/}
+GTK_MODULES=${GTK_MODULES//::/:}
+GTK_MODULES=${GTK_MODULES#:}
+GTK_MODULES=${GTK_MODULES%:}
+export GTK_MODULES
+
+# ---------- Abrir tmux al iniciar una terminal ----------
+# Solo en terminales interactivas, fuera de tmux y fuera de Claude Code.
+# Sin "exec": si tmux falla (p. ej. error en ~/.tmux.conf) te quedas en bash.
+# Cada terminal es una pestaña de la sesión "main": crea su propia ventana y se
+# engancha con una sesión agrupada (comparte ventanas, pero elige la suya).
+# La ventana se marca con @owner = tty de la terminal; al cerrarla, el hook
+# client-detached de ~/.tmux.conf mata esa ventana (~/.config/tmux/close-owned.sh).
+# Al cerrar la última terminal, main queda sin ventanas y tmux termina.
+if command -v tmux >/dev/null && [ -z "$TMUX" ] && [ -z "$CLAUDECODE" ] && [ -t 0 ]; then
+  if tmux has-session -t main 2>/dev/null; then
+    _tmux_win=$(tmux new-window -d -P -F '#{window_id}' -t main: -c "$PWD")
+  else
+    _tmux_win=$(tmux new-session -d -P -F '#{window_id}' -s main)
+  fi
+  if [ -n "$_tmux_win" ]; then
+    tmux set-option -w -t "$_tmux_win" @owner "$(tty)"
+    tmux new-session -t main -s "t$$" \; select-window -t "$_tmux_win" \; set destroy-unattached on && exit
+  fi
+  unset _tmux_win
+fi
