@@ -13,3 +13,5 @@ ripgrep
 fzf
 tlp
 glow
+fish
+wl-clipboard

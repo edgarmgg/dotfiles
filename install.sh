@@ -11,10 +11,10 @@ REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$REPO"
 
 # ---------------------------- Configuración ----------------------------
-BASE_PKGS=(bash git vim tmux ssh vscode)        # home/
+BASE_PKGS=(bash git vim tmux fish ssh vscode)        # home/
 THEME_PKGS=(ptyxis starship fastfetch gtk) # theme/home/
-BASIC_STEPS=(apt fastfetch stow vimplug vscode)
-FULL_STEPS=(apt fastfetch starship font stow stow_theme vimplug dconf vscode)
+BASIC_STEPS=(apt fastfetch stow tpm fisher vimplug vscode)
+FULL_STEPS=(apt fastfetch starship font stow stow_theme tpm fisher vimplug dconf vscode)
 
 FONT_ZIP="JetBrainsMono"                   # nombre en Nerd Fonts
 FONT_MATCH="JetBrainsMonoNL Nerd"          # cómo la ve fc-list
@@ -25,6 +25,7 @@ declare -A DCONF=(
   [interface]=/org/gnome/desktop/interface/
   [dock]=/org/gnome/shell/extensions/dash-to-dock/
   [keybindings]=/org/gnome/settings-daemon/plugins/media-keys/
+  [peripherals]=/org/gnome/desktop/peripherals/
 )
 
 # ------------------------------ Utilidades -----------------------------
@@ -107,12 +108,28 @@ step_dconf() {
   done
 }
 
+step_tpm() {
+  local tpm="$HOME/.tmux/plugins/tpm"
+  if [[ -d $tpm ]]; then info "tpm ya instalado"; return; fi
+  git clone https://github.com/tmux-plugins/tpm "$tpm"
+  "$tpm/bin/install_plugins" || warn "no pude instalar los plugins de tmux"
+}
+
+step_fisher() {
+  have fish || { warn "fish no está instalado, me lo salto"; return; }
+  fish -c 'if not functions -q fisher
+      curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source
+      fisher install jorgebucaran/fisher
+  end
+  fisher update' || warn "fisher falló"
+}
+
 step_vimplug() {
   local plug="$HOME/.vim/autoload/plug.vim"
   if [[ ! -f $plug ]]; then
     curl -fLo "$plug" --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   fi
-  vim -es -u "$HOME/.vimrc" -i NONE -c PlugInstall -c qa || true
+  vim -es -u "$HOME/.vimrc" -i NONE -c PlugInstall -c qa || warn "PlugInstall devolvió error"
   info "vim-plug y plugins listos"
 }
 

@@ -1,6 +1,6 @@
 # dotfiles
 
-Configuración personal de Ubuntu 26.04: bash, vim, tmux, git, VS Code y un tema de terminal propio. Se instala con un solo script y es idempotente.
+Configuración personal de Ubuntu 26.04: bash, fish, vim, tmux, git, VS Code y un tema de terminal propio. Se instala con un solo script y es idempotente.
 
 ## Instalación
 
@@ -20,7 +20,7 @@ Se puede ejecutar varias veces sin problema.
 
 | Perfil | Incluye |
 |---|---|
-| **Básico** | Paquetes de apt, bash, git, vim (con vim-plug y plugins), tmux, ssh y VS Code |
+| **Básico** | Paquetes de apt, bash, fish (con fisher), git, vim (con vim-plug y plugins), tmux (con TPM), ssh y VS Code |
 | **Completo** | El básico, más Starship, Nerd Font, paleta de Ptyxis, fastfetch y ajustes de GNOME |
 
 ## Estructura
@@ -45,7 +45,7 @@ Se puede ejecutar varias veces sin problema.
 ## Notas
 
 - Las plantillas de Vim (`.cc`, `.h` y Makefile) están en `home/vim/.vim/templates/`.
-- Los datos privados no se suben al repo: los alias van en `~/.bash_aliases.local` y los hosts de SSH en `~/.ssh/config.local`.
+- Los datos privados no se suben al repo: los alias van en `~/.bash_aliases.local` (bash) y `~/.config/fish/local.fish` (fish) y los hosts de SSH en `~/.ssh/config.local`.
 - `dotsync` exporta los ajustes actuales de GNOME y pide confirmación antes de hacer commit y push. Se indica la ruta del repo con la variable `$DOTFILES`.
 
 ## Licencia

@@ -8,3 +8,4 @@ home/ssh/.ssh/authorized_keys
 *.old
 .bash_aliases.local
 home/ssh/.ssh/config.local
+local.fish
