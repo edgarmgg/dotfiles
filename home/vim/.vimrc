@@ -1,6 +1,14 @@
 " ---------- Básico ----------
 set nocompatible
 syntax on
+" Dentro de tmux (TERM=tmux-256color) Vim no detecta el fondo oscuro ni el
+" truecolor, y cae a colores pensados para fondo claro.
+set background=dark
+if has('termguicolors')
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
+endif
 set number
 set ruler
 set showcmd
