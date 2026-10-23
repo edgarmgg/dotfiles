@@ -9,6 +9,11 @@ if has('termguicolors')
   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
   set termguicolors
 endif
+colorscheme cyberdream
+" Fondo del terminal (negro) en vez del que trae el esquema
+for g in ['Normal', 'NonText', 'EndOfBuffer', 'LineNr', 'SignColumn', 'FoldColumn']
+  exe 'highlight ' . g . ' guibg=NONE ctermbg=NONE'
+endfor
 set number
 set ruler
 set showcmd
@@ -74,5 +79,25 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     Plug 'preservim/nerdtree'
     Plug 'jiangmiao/auto-pairs'
     Plug 'sheerun/vim-polyglot'
+    Plug 'tpope/vim-commentary'
+    Plug 'tpope/vim-surround'
+    Plug 'tpope/vim-fugitive'
+    Plug 'airblade/vim-gitgutter'
+    Plug 'itchyny/lightline.vim'
+    Plug 'dense-analysis/ale'
   call plug#end()
 endif
+
+" ---------- Barra de estado (lightline) ----------
+set noshowmode
+let g:lightline = {'colorscheme': 'jellybeans'}
+
+" ---------- Errores y formato al vuelo (ALE) ----------
+" Avisa con clang-tidy y cppcheck; <leader>f formatea con clang-format (Google)
+let g:ale_linters = {'cpp': ['clangtidy', 'cppcheck']}
+let g:ale_fixers = {'cpp': ['clang-format']}
+let g:ale_cpp_clangformat_options = '-style=Google'
+let g:ale_cpp_clangtidy_options = '-std=c++20'
+nmap <silent> ]e <Plug>(ale_next_wrap)
+nmap <silent> [e <Plug>(ale_previous_wrap)
+nnoremap <leader>f :ALEFix<CR>
