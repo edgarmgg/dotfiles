@@ -55,7 +55,7 @@ if ! shopt -oq posix; then
 fi
 
 # ---------- Funciones ----------
-# Exporta ajustes de GNOME/VS Code, enseña los cambios y los sube (pide confirmación)
+# Exporta ajustes de GNOME, enseña los cambios y los sube (pide confirmación)
 dotsync() {
   local repo="${DOTFILES:-$HOME/dev/dotfiles}"
   ( cd "$repo" || { echo "No existe $repo" >&2; exit 1; }

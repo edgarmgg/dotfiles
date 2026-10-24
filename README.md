@@ -1,52 +1,32 @@
 # dotfiles
 
-Personal configuration for Ubuntu 26.04: bash, fish, vim, tmux, git and a custom terminal theme. It installs with a single script and is idempotent.
+Personal configuration for Ubuntu 26.04: bash, fish, vim, tmux, git and a custom terminal theme.
 
 ## Installation
-
-On a fresh machine:
 
     git clone https://github.com/edgarmgg/dotfiles.git ~/dotfiles
     cd ~/dotfiles && ./install.sh
 
-The script asks which profile to install. To skip the prompt:
-
-    ./install.sh --basic
-    ./install.sh --full
-
-It is safe to run it multiple times.
-
-## Profiles
+The script asks for a profile; to skip the prompt use `./install.sh --basic` or `./install.sh --full`. It is idempotent, and any existing file in the way is saved as `.bak` instead of deleted.
 
 | Profile | Includes |
 |---|---|
-| **Basic** | apt packages, bash, fish (with fisher), git, vim (with vim-plug and plugins), tmux (with TPM), ssh and VS Code |
-| **Full** | Everything in Basic, plus Starship, Nerd Font, Ptyxis palette and GNOME settings |
+| **Basic** | apt packages, bash, fish, git, vim, tmux and ssh |
+| **Full** | Basic, plus Starship, Nerd Font, Ptyxis palette and GNOME settings |
 
 ## Structure
 
 | Path | Contents |
 |---|---|
-| `home/` | Base configuration, one Stow package per tool |
+| `home/` | One [GNU Stow](https://www.gnu.org/software/stow/) package per tool |
 | `theme/` | Starship, Ptyxis palette and GNOME settings (`dconf`) |
-| `packages/` | Lists of apt packages and VS Code extensions |
-| `install.sh` | Modular step-by-step installer |
-
-## How it works
-
-`install.sh` installs the packages, Starship and the Nerd Font, and links the files with [GNU Stow](https://www.gnu.org/software/stow/). It then loads the GNOME settings with `dconf load`. If an existing file is in the way, it saves it as `.bak` instead of deleting it.
-
-## Theme
-
-- **Font:** JetBrainsMono Nerd Font, 12 pt
-- **Terminal:** Ptyxis, 102x26 window
-- **Palette:** custom (`theme-edgar`), with a purple highlight color
+| `packages/` | apt package list |
+| `install.sh` | Step-by-step installer |
 
 ## Notes
 
-- The Vim templates (`.cc`, `.h` and Makefile) are in `home/vim/.vim/templates/`.
-- Private data is not pushed to the repo: aliases go in `~/.bash_aliases.local` (bash) and `~/.config/fish/local.fish` (fish), and SSH hosts in `~/.ssh/config.local`.
-- `dotsync` exports the current GNOME settings and asks for confirmation before committing and pushing. The repo path is given by the `$DOTFILES` variable.
+- Private data stays out of the repo: `~/.bash_aliases.local` (bash), `~/.config/fish/local.fish` (fish) and `~/.ssh/config.local` (ssh).
+- `dotsync` exports the current GNOME settings and asks before committing and pushing. The repo path comes from `$DOTFILES`.
 
 ## License
 

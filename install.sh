@@ -11,10 +11,10 @@ REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$REPO"
 
 # ---------------------------- Configuración ----------------------------
-BASE_PKGS=(bash git vim tmux fish ssh vscode)        # home/
+BASE_PKGS=(bash git vim tmux fish ssh)  # home/
 THEME_PKGS=(ptyxis starship gtk) # theme/home/
-BASIC_STEPS=(apt stow tpm fisher vimplug vscode)
-FULL_STEPS=(apt starship font stow stow_theme tpm fisher vimplug dconf vscode)
+BASIC_STEPS=(apt stow tpm fisher vimplug)
+FULL_STEPS=(apt starship font stow stow_theme tpm fisher vimplug dconf)
 
 FONT_ZIP="JetBrainsMono"                   # nombre en Nerd Fonts
 FONT_MATCH="JetBrainsMonoNL Nerd"          # cómo la ve fc-list
@@ -125,16 +125,6 @@ step_vimplug() {
   info "vim-plug y plugins listos"
 }
 
-step_vscode() {
-  have code || sudo snap install code --classic
-  [[ -f packages/vscode.txt ]] || return 0
-  local installed ext; installed="$(code --list-extensions)"
-  while read -r ext; do
-    [[ -z $ext ]] && continue
-    grep -qix "$ext" <<< "$installed" || code --install-extension "$ext"
-  done < packages/vscode.txt
-}
-
 # Solo bajo demanda: guarda en el repo lo que tienes ahora
 step_export() {
   local name
@@ -143,10 +133,6 @@ step_export() {
     dconf dump "${DCONF[$name]}" > "theme/dconf/$name.dconf"
     info "exportado: theme/dconf/$name.dconf"
   done
-  if have code; then
-    code --list-extensions > packages/vscode.txt
-    info "exportado: packages/vscode.txt"
-  fi
 }
 
 # ------------------------------ Ejecución ------------------------------
@@ -160,7 +146,7 @@ run() {
 }
 
 choose_profile() {
-  printf '\n  1) Básica    paquetes, bash, git, vim, tmux, ssh y VS Code\n' >&2
+  printf '\n  1) Básica    paquetes, bash, git, vim, tmux y ssh\n' >&2
   printf '  2) Completa  la básica + Starship, Nerd Font, paleta\n' >&2
   printf '               y ajustes de GNOME\n\n' >&2
   local ans

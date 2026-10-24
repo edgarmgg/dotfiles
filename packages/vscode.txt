@@ -1,4 +1,0 @@
-formulahendry.code-runner
-jutge-org.jutge-vscode
-ms-vscode.cpptools
-ms-vscode.makefile-tools

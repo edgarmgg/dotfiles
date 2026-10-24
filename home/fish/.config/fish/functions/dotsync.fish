@@ -1,4 +1,4 @@
-# Exporta ajustes de GNOME/VS Code, enseña los cambios y los sube (pide confirmación)
+# Exporta ajustes de GNOME, enseña los cambios y los sube (pide confirmación)
 function dotsync --description 'Exporta y sube los dotfiles'
     set -l repo $HOME/dev/dotfiles
     set -q DOTFILES; and set repo $DOTFILES
