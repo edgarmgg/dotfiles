@@ -1,6 +1,6 @@
 # dotfiles
 
-Personal configuration for Ubuntu 26.04: bash, fish, vim, tmux, git, VS Code and a custom terminal theme. It installs with a single script and is idempotent.
+Personal configuration for Ubuntu 26.04: bash, fish, vim, tmux, git and a custom terminal theme. It installs with a single script and is idempotent.
 
 ## Installation
 
