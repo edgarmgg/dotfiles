@@ -64,7 +64,7 @@ autocmd BufNewFile *.cc 0r ~/.vim/templates/header.cc | $delete _
 autocmd BufNewFile *.cc %s#%DATE%#\=strftime('%d/%m/%Y')#ge
 autocmd BufNewFile *.cc %s#%FILE%#\=expand('%:t')#ge
 
-autocmd BufNewFile *.h 0r ~/.vim/templates/header.h | silent! %s/%FILE%/\=expand('%:t')/ | silent! %s/%DATE%/\=strftime('%d\/%m\/%Y')/ | $delete _
+autocmd BufNewFile *.h 0r ~/.vim/templates/header.h | silent! %s/%FILE%/\=expand('%:t')/ | silent! %s#%DATE%#\=strftime('%d/%m/%Y')# | $delete _
 
 " ---------- Plantilla para archivos Makefile nuevos ----------
 autocmd FileType make setlocal noexpandtab
