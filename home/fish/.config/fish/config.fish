@@ -20,6 +20,9 @@ if status is-interactive
     abbr -a fullcharge 'sudo tlp fullcharge'
     abbr -a .. 'cd ..'
     abbr -a ... 'cd ../..'
+    abbr -a killw 'tmux killw'
+    abbr -a neww 'tmux neww'
+    abbr -a killp 'tmux killp'
 
     # Abreviaturas privadas (servidores, usuarios); este fichero no se sube al repo
     test -f ~/.config/fish/local.fish; and source ~/.config/fish/local.fish
