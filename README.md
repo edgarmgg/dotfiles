@@ -1,6 +1,6 @@
 # dotfiles
 
-Personal configuration for Ubuntu 26.04: bash, fish, vim, tmux, git and a custom terminal theme.
+Personal config, fish, vim, tmux, git and a custom terminal theme.
 
 ## Installation
 
