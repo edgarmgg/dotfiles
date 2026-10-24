@@ -1,53 +1,53 @@
 # dotfiles
 
-Configuración personal de Ubuntu 26.04: bash, fish, vim, tmux, git, VS Code y un tema de terminal propio. Se instala con un solo script y es idempotente.
+Personal configuration for Ubuntu 26.04: bash, fish, vim, tmux, git, VS Code and a custom terminal theme. It installs with a single script and is idempotent.
 
-## Instalación
+## Installation
 
-En una máquina nueva:
+On a fresh machine:
 
     git clone https://github.com/edgarmgg/dotfiles.git ~/dotfiles
     cd ~/dotfiles && ./install.sh
 
-El script pregunta qué perfil instalar. Para evitar la pregunta:
+The script asks which profile to install. To skip the prompt:
 
     ./install.sh --basic
     ./install.sh --full
 
-Se puede ejecutar varias veces sin problema.
+It is safe to run it multiple times.
 
-## Perfiles
+## Profiles
 
-| Perfil | Incluye |
+| Profile | Includes |
 |---|---|
-| **Básico** | Paquetes de apt, bash, fish (con fisher), git, vim (con vim-plug y plugins), tmux (con TPM), ssh y VS Code |
-| **Completo** | El básico, más Starship, Nerd Font, paleta de Ptyxis, fastfetch y ajustes de GNOME |
+| **Basic** | apt packages, bash, fish (with fisher), git, vim (with vim-plug and plugins), tmux (with TPM), ssh and VS Code |
+| **Full** | Everything in Basic, plus Starship, Nerd Font, Ptyxis palette, fastfetch and GNOME settings |
 
-## Estructura
+## Structure
 
-| Ruta | Contenido |
+| Path | Contents |
 |---|---|
-| `home/` | Configuración base, un paquete de Stow por herramienta |
-| `theme/` | Starship, fastfetch, paleta de Ptyxis y ajustes de GNOME (`dconf`) |
-| `packages/` | Listas de paquetes de apt y de extensiones de VS Code |
-| `install.sh` | Instalador modular por pasos |
+| `home/` | Base configuration, one Stow package per tool |
+| `theme/` | Starship, fastfetch, Ptyxis palette and GNOME settings (`dconf`) |
+| `packages/` | Lists of apt packages and VS Code extensions |
+| `install.sh` | Modular step-by-step installer |
 
-## Cómo funciona
+## How it works
 
-`install.sh` instala los paquetes, Starship y la Nerd Font, y enlaza los archivos con [GNU Stow](https://www.gnu.org/software/stow/). Después carga los ajustes de GNOME con `dconf load`. Si un archivo existente estorba, lo guarda como `.bak` en lugar de borrarlo.
+`install.sh` installs the packages, Starship and the Nerd Font, and links the files with [GNU Stow](https://www.gnu.org/software/stow/). It then loads the GNOME settings with `dconf load`. If an existing file is in the way, it saves it as `.bak` instead of deleting it.
 
-## Tema
+## Theme
 
-- **Fuente:** JetBrainsMono Nerd Font, 12 pt
-- **Terminal:** Ptyxis, ventana de 102x26
-- **Paleta:** propia (`theme-edgar`), con color de resaltado morado
+- **Font:** JetBrainsMono Nerd Font, 12 pt
+- **Terminal:** Ptyxis, 102x26 window
+- **Palette:** custom (`theme-edgar`), with a purple highlight color
 
-## Notas
+## Notes
 
-- Las plantillas de Vim (`.cc`, `.h` y Makefile) están en `home/vim/.vim/templates/`.
-- Los datos privados no se suben al repo: los alias van en `~/.bash_aliases.local` (bash) y `~/.config/fish/local.fish` (fish) y los hosts de SSH en `~/.ssh/config.local`.
-- `dotsync` exporta los ajustes actuales de GNOME y pide confirmación antes de hacer commit y push. Se indica la ruta del repo con la variable `$DOTFILES`.
+- The Vim templates (`.cc`, `.h` and Makefile) are in `home/vim/.vim/templates/`.
+- Private data is not pushed to the repo: aliases go in `~/.bash_aliases.local` (bash) and `~/.config/fish/local.fish` (fish), and SSH hosts in `~/.ssh/config.local`.
+- `dotsync` exports the current GNOME settings and asks for confirmation before committing and pushing. The repo path is given by the `$DOTFILES` variable.
 
-## Licencia
+## License
 
 [MIT](LICENSE)
