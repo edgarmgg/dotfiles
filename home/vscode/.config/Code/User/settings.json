@@ -1,11 +1,5 @@
 {
   "explorer.confirmDelete": false,
-  "github.copilot.enable": {
-    "*": false,
-    "plaintext": false,
-    "markdown": false,
-    "scminput": false
-  },
   "code-runner.runInTerminal": true,
   "explorer.confirmDragAndDrop": false,
   "editor.tabSize": 2,

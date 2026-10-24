@@ -21,14 +21,14 @@ It is safe to run it multiple times.
 | Profile | Includes |
 |---|---|
 | **Basic** | apt packages, bash, fish (with fisher), git, vim (with vim-plug and plugins), tmux (with TPM), ssh and VS Code |
-| **Full** | Everything in Basic, plus Starship, Nerd Font, Ptyxis palette, fastfetch and GNOME settings |
+| **Full** | Everything in Basic, plus Starship, Nerd Font, Ptyxis palette and GNOME settings |
 
 ## Structure
 
 | Path | Contents |
 |---|---|
 | `home/` | Base configuration, one Stow package per tool |
-| `theme/` | Starship, fastfetch, Ptyxis palette and GNOME settings (`dconf`) |
+| `theme/` | Starship, Ptyxis palette and GNOME settings (`dconf`) |
 | `packages/` | Lists of apt packages and VS Code extensions |
 | `install.sh` | Modular step-by-step installer |
 

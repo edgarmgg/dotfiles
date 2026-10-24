@@ -12,9 +12,9 @@ cd "$REPO"
 
 # ---------------------------- Configuración ----------------------------
 BASE_PKGS=(bash git vim tmux fish ssh vscode)        # home/
-THEME_PKGS=(ptyxis starship fastfetch gtk) # theme/home/
-BASIC_STEPS=(apt fastfetch stow tpm fisher vimplug vscode)
-FULL_STEPS=(apt fastfetch starship font stow stow_theme tpm fisher vimplug dconf vscode)
+THEME_PKGS=(ptyxis starship gtk) # theme/home/
+BASIC_STEPS=(apt stow tpm fisher vimplug vscode)
+FULL_STEPS=(apt starship font stow stow_theme tpm fisher vimplug dconf vscode)
 
 FONT_ZIP="JetBrainsMono"                   # nombre en Nerd Fonts
 FONT_MATCH="JetBrainsMonoNL Nerd"          # cómo la ve fc-list
@@ -60,14 +60,6 @@ stow_pkgs() {
 step_apt() {
   sudo apt-get update
   grep -Ev '^\s*(#|$)' packages/apt.txt | xargs -r sudo apt-get install -y
-}
-
-step_fastfetch() {
-  if have fastfetch; then info "ya instalado"; return; fi
-  sudo apt-get install -y fastfetch || {
-    sudo add-apt-repository -y ppa:zhangsongcui3371/fastfetch
-    sudo apt-get update && sudo apt-get install -y fastfetch
-  }
 }
 
 step_starship() {
@@ -169,7 +161,7 @@ run() {
 
 choose_profile() {
   printf '\n  1) Básica    paquetes, bash, git, vim, tmux, ssh y VS Code\n' >&2
-  printf '  2) Completa  la básica + Starship, Nerd Font, paleta, fastfetch\n' >&2
+  printf '  2) Completa  la básica + Starship, Nerd Font, paleta\n' >&2
   printf '               y ajustes de GNOME\n\n' >&2
   local ans
   read -rp "Elige perfil [1/2]: " ans
