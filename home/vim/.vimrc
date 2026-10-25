@@ -70,7 +70,7 @@ autocmd BufNewFile *.h 0r ~/.vim/templates/header.h | silent! %s/%FILE%/\=expand
 autocmd FileType make setlocal noexpandtab
 augroup make_template
   autocmd!
-  autocmd BufNewFile Makefile,makefile,GNUmakefile,*.mk 0r ~/.vim/templates/template.make
+  autocmd BufNewFile Makefile,makefile,GNUmakefile,*.mk 0r ~/.vim/templates/makefile.template
 augroup END
 
 " ---------- Plugins (vim-plug lo instala install.sh) ----------
