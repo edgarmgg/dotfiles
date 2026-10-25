@@ -31,6 +31,11 @@ if status is-interactive
     if command -q starship
         starship init fish | source
     end
+
+    # zoxide: `z dir` salta al directorio más usado que coincida (aprende con cada cd)
+    if command -q zoxide
+        zoxide init fish | source
+    end
 end
 
 # ~/.local/bin (markitdown, etc.) en el PATH; fish_add_path no duplica entradas
