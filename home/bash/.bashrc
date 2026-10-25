@@ -60,15 +60,14 @@ dotsync() {
   local repo="${DOTFILES:-$HOME/dev/dotfiles}"
   ( cd "$repo" || { echo "No existe $repo" >&2; exit 1; }
     ./install.sh export
-    git add -A
-    if git diff --cached --quiet; then
+    if [ -z "$(git status --porcelain)" ]; then
       echo "Sin cambios que subir"
       exit 0
     fi
     git status --short
     read -rp "¿Commit y push? [s/N] " ans
-    [[ $ans == [sSyY]* ]] || { echo "Cancelado (los cambios siguen en stage)"; exit 0; }
-    git commit -m "${1:-Actualizar dotfiles}" && git push )
+    [[ $ans == [sSyY]* ]] || { echo "Cancelado (no se ha añadido nada al stage)"; exit 0; }
+    git add -A && git commit -m "${1:-Actualizar dotfiles}" && git push )
 }
 
 # Evita el aviso "Not loading module atk-bridge" de GTK (el módulo lo añade el sistema en /etc/environment.d)

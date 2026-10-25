@@ -12,3 +12,6 @@ fzf
 tlp
 fish
 wl-clipboard
+zoxide
+libnotify-bin
+gh

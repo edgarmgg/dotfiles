@@ -8,8 +8,7 @@ function dotsync --description 'Exporta y sube los dotfiles'
     end
     pushd $repo
     ./install.sh export
-    git add -A
-    if git diff --cached --quiet
+    if test -z "$(git status --porcelain)"
         echo "Sin cambios que subir"
         popd
         return 0
@@ -19,9 +18,9 @@ function dotsync --description 'Exporta y sube los dotfiles'
     if string match -qir '^[sy]' -- $ans
         set -l msg "Actualizar dotfiles"
         set -q argv[1]; and set msg $argv[1]
-        git commit -m $msg; and git push
+        git add -A; and git commit -m $msg; and git push
     else
-        echo "Cancelado (los cambios siguen en stage)"
+        echo "Cancelado (no se ha añadido nada al stage)"
     end
     popd
 end
