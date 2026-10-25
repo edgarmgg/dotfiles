@@ -60,11 +60,28 @@ autocmd BufReadPost *
      \ endif
 
 " ---------- Plantilla para archivos .cc y .h nuevos ----------
-autocmd BufNewFile *.cc 0r ~/.vim/templates/header.cc | $delete _
-autocmd BufNewFile *.cc %s#%DATE%#\=strftime('%d/%m/%Y')#ge
-autocmd BufNewFile *.cc %s#%FILE%#\=expand('%:t')#ge
+" Marcadores: %FILE% nombre, %DATE% fecha, %BASE% nombre sin _main ni extension,
+" %GUARD% guard de cabecera (p02_euclides.h -> P02_EUCLIDES_H_).
+function! s:ApplyTemplate(template) abort
+  execute '0r ~/.vim/templates/' . a:template
+  if getline('$') ==# ''
+    $delete _
+  endif
+  let l:name = expand('%:t')
+  let l:base = substitute(l:name, '\(_main\)\?\.[^.]*$', '', '')
+  let l:guard = toupper(substitute(l:name, '[^A-Za-z0-9]', '_', 'g')) . '_'
+  silent! %s#%FILE%#\=l:name#ge
+  silent! %s#%DATE%#\=strftime('%d/%m/%Y')#ge
+  silent! %s#%BASE%#\=l:base#ge
+  silent! %s#%GUARD%#\=l:guard#ge
+endfunction
 
-autocmd BufNewFile *.h 0r ~/.vim/templates/header.h | silent! %s/%FILE%/\=expand('%:t')/ | silent! %s#%DATE%#\=strftime('%d/%m/%Y')# | $delete _
+augroup code_templates
+  autocmd!
+  autocmd BufNewFile *.cc call s:ApplyTemplate(
+        \ expand('%:t') =~# '_main\.cc$' ? 'header_main.cc' : 'header.cc')
+  autocmd BufNewFile *.h call s:ApplyTemplate('header.h')
+augroup END
 
 " ---------- Plantilla para archivos Makefile nuevos ----------
 autocmd FileType make setlocal noexpandtab

@@ -11,8 +11,5 @@
  * @bug There are no known bugs
  */
 
+#include "%BASE%.h"
 #include <iostream>
-
-int main() {
-  return 0;
-}
