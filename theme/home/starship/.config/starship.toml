@@ -25,7 +25,8 @@ format = '[@$hostname]($style)[:](muted)'
 
 [directory]
 style = 'bold path'
-truncation_length = 3
+truncation_length = 1
+truncation_symbol = '…/'
 format = '[$path]($style)[$read_only]($read_only_style) '
 
 [git_branch]
