@@ -1,27 +1,15 @@
 CXX      := g++
-CXXFLAGS := -std=c++17 -Wall -Wextra -pedantic -g -MMD -MP
+CXXFLAGS := -std=c++17 -Wall -Wextra -pedantic
 TARGET   := $(notdir $(CURDIR))
-BUILD    := .build
 SRCS     := $(wildcard *.cc)
-OBJS     := $(SRCS:%.cc=$(BUILD)/%.o)
+HDRS     := $(wildcard *.h)
 
 all: $(TARGET)
 
-$(TARGET): $(OBJS)
-	$(CXX) $(CXXFLAGS) -o $@ $^
-
-$(BUILD)/%.o: %.cc | $(BUILD)
-	$(CXX) $(CXXFLAGS) -c -o $@ $<
-
-$(BUILD):
-	mkdir -p $@
-
-debug: CXXFLAGS += -O0 -fsanitize=address,undefined -fno-omit-frame-pointer
-debug: clean $(TARGET)
+$(TARGET): $(SRCS) $(HDRS)
+	$(CXX) $(CXXFLAGS) -o $@ $(SRCS)
 
 clean:
-	-rm -r $(BUILD) $(TARGET)
+	rm -f $(TARGET)
 
--include $(OBJS:.o=.d)
-
-.PHONY: all debug clean
+.PHONY: all clean

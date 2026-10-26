@@ -30,7 +30,6 @@ set laststatus=2
 set hlsearch incsearch ignorecase smartcase
 let mapleader=" "
 nnoremap <leader><space> :nohlsearch<CR>
-nnoremap <leader>e :NERDTreeToggle<CR>
 nnoremap <C-s> :w<CR>
 inoremap <C-s> <Esc>:w<CR>a
 vnoremap <C-s> <Esc>:w<CR>
@@ -60,26 +59,23 @@ autocmd BufReadPost *
      \ endif
 
 " ---------- Plantilla para archivos .cc y .h nuevos ----------
-" Marcadores: %FILE% nombre, %DATE% fecha, %BASE% nombre sin _main ni extension,
-" %GUARD% guard de cabecera (p02_euclides.h -> P02_EUCLIDES_H_).
+" Marcadores: %FILE% nombre, %DATE% fecha, %GUARD% guard de cabecera
+" (p02_euclides.h -> P02_EUCLIDES_H_).
 function! s:ApplyTemplate(template) abort
   execute '0r ~/.vim/templates/' . a:template
   if getline('$') ==# ''
     $delete _
   endif
   let l:name = expand('%:t')
-  let l:base = substitute(l:name, '\(_main\)\?\.[^.]*$', '', '')
   let l:guard = toupper(substitute(l:name, '[^A-Za-z0-9]', '_', 'g')) . '_'
   silent! %s#%FILE%#\=l:name#ge
   silent! %s#%DATE%#\=strftime('%d/%m/%Y')#ge
-  silent! %s#%BASE%#\=l:base#ge
   silent! %s#%GUARD%#\=l:guard#ge
 endfunction
 
 augroup code_templates
   autocmd!
-  autocmd BufNewFile *.cc call s:ApplyTemplate(
-        \ expand('%:t') =~# '_main\.cc$' ? 'header_main.cc' : 'header.cc')
+  autocmd BufNewFile *.cc call s:ApplyTemplate('header.cc')
   autocmd BufNewFile *.h call s:ApplyTemplate('header.h')
 augroup END
 
@@ -93,17 +89,6 @@ augroup END
 " ---------- Plugins (vim-plug lo instala install.sh) ----------
 if filereadable(expand('~/.vim/autoload/plug.vim'))
   call plug#begin()
-    Plug 'preservim/nerdtree'
     Plug 'jiangmiao/auto-pairs'
-    Plug 'sheerun/vim-polyglot'
-    Plug 'tpope/vim-commentary'
-    Plug 'tpope/vim-surround'
-    Plug 'tpope/vim-fugitive'
-    Plug 'airblade/vim-gitgutter'
-    Plug 'itchyny/lightline.vim'
   call plug#end()
 endif
-
-" ---------- Barra de estado (lightline) ----------
-set noshowmode
-let g:lightline = {'colorscheme': 'jellybeans'}

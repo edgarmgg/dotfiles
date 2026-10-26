@@ -11,5 +11,8 @@
  * @bug There are no known bugs
  */
 
-#include "%BASE%.h"
 #include <iostream>
+
+int main(int argc, char* argv[]) {
+  return 0;
+}
