@@ -90,5 +90,10 @@ augroup END
 if filereadable(expand('~/.vim/autoload/plug.vim'))
   call plug#begin()
     Plug 'jiangmiao/auto-pairs'
+    Plug 'itchyny/lightline.vim'
   call plug#end()
 endif
+
+" ---------- Barra de estado (lightline) ----------
+set noshowmode
+let g:lightline = {'colorscheme': 'jellybeans'}
