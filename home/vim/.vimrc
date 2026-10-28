@@ -60,7 +60,8 @@ autocmd BufReadPost *
 
 " ---------- Plantilla para archivos .cc y .h nuevos ----------
 " Marcadores: %FILE% nombre, %DATE% fecha, %GUARD% guard de cabecera
-" (p02_euclides.h -> P02_EUCLIDES_H_).
+" (p02_euclides.h -> P02_EUCLIDES_H_), %EMAIL% email leído de ~/.vim/email.local
+" (fichero local, fuera del repo; si no existe, el marcador se elimina).
 function! s:ApplyTemplate(template) abort
   execute '0r ~/.vim/templates/' . a:template
   if getline('$') ==# ''
@@ -71,6 +72,9 @@ function! s:ApplyTemplate(template) abort
   silent! %s#%FILE%#\=l:name#ge
   silent! %s#%DATE%#\=strftime('%d/%m/%Y')#ge
   silent! %s#%GUARD%#\=l:guard#ge
+  let l:email_file = expand('~/.vim/email.local')
+  let l:email = filereadable(l:email_file) ? get(readfile(l:email_file), 0, '') : ''
+  silent! %s# *%EMAIL%#\=empty(l:email) ? '' : ' ' . l:email#ge
 endfunction
 
 augroup code_templates

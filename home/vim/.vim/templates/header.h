@@ -5,7 +5,7 @@
  * Informática Básica 2026-2027
  *
  * @file %FILE%
- * @author Edgar Manuel Gómez García
+ * @author Edgar Manuel Gómez García %EMAIL%
  * @date %DATE%
  * @brief
  * @bug There are no known bugs
