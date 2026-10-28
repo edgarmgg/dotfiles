@@ -9,3 +9,18 @@ home/ssh/.ssh/authorized_keys
 .bash_aliases.local
 home/ssh/.ssh/config.local
 local.fish
+
+# Defensa extra: nunca deberían acabar en el repo
+.env.*
+.netrc
+.npmrc
+.pypirc
+.aws/
+.docker/config.json
+.gnupg/
+*viminfo*
+*_history
+fish_variables
+*.pem
+*.key
+*.log
