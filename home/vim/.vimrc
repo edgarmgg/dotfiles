@@ -90,6 +90,12 @@ augroup make_template
   autocmd BufNewFile Makefile,makefile,GNUmakefile,*.mk 0r ~/.vim/templates/makefile.template
 augroup END
 
+" ---------- Erratas típicas de Shift (:Q, :W, :Wq, :WQ) ----------
+command! -bang Q quit<bang>
+command! -bang W write<bang>
+command! -bang Wq wq<bang>
+command! -bang WQ wq<bang>
+
 " ---------- Plugins (vim-plug lo instala install.sh) ----------
 if filereadable(expand('~/.vim/autoload/plug.vim'))
   call plug#begin()
