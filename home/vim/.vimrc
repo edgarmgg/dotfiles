@@ -58,7 +58,7 @@ autocmd BufReadPost *
      \   exe "normal! g`\"" |
      \ endif
 
-" ---------- Plantilla para archivos .cc y .h nuevos ----------
+" ---------- Plantilla para archivos .cc, .h y Makefile nuevos ----------
 " Marcadores: %FILE% nombre, %DATE% fecha, %GUARD% guard de cabecera
 " (p02_euclides.h -> P02_EUCLIDES_H_), %EMAIL% email leído de ~/.vim/email.local
 " (fichero local, fuera del repo; si no existe, el marcador se elimina).
@@ -87,7 +87,7 @@ augroup END
 autocmd FileType make setlocal noexpandtab
 augroup make_template
   autocmd!
-  autocmd BufNewFile Makefile,makefile,GNUmakefile,*.mk 0r ~/.vim/templates/makefile.template
+  autocmd BufNewFile Makefile,makefile,GNUmakefile,*.mk call s:ApplyTemplate('makefile.template')
 augroup END
 
 " ---------- Erratas típicas de Shift (:Q, :W, :Wq, :WQ) ----------
