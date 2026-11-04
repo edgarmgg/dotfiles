@@ -9,7 +9,6 @@ tmux
 vim-gtk3
 ripgrep
 fzf
-tlp
 fish
 wl-clipboard
 zoxide

@@ -17,7 +17,6 @@ if status is-interactive
     abbr -a vpnstatus 'forticlient vpn status'
     abbr -a vpnoff 'forticlient vpn disconnect'
     abbr -a g++ 'g++ -std=c++17 -Wall -Wextra -Wpedantic -Wshadow -Wconversion'
-    abbr -a fullcharge 'sudo tlp fullcharge'
     abbr -a .. 'cd ..'
     abbr -a ... 'cd ../..'
     abbr -a killw 'tmux killw'
