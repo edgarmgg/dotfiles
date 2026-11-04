@@ -97,3 +97,7 @@ if command -v tmux >/dev/null && [ -z "$TMUX" ] && [ -z "$CLAUDECODE" ] && [ -t 
   fi
   unset _tmux_win
 fi
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
