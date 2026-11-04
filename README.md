@@ -4,8 +4,8 @@ Personal config, fish, vim, tmux, git and a custom terminal theme.
 
 ## Installation
 
-    git clone https://github.com/edgarmgg/dotfiles.git ~/dotfiles
-    cd ~/dotfiles && ./install.sh
+    git clone https://github.com/edgarmgg/dotfiles.git ~/dev/dotfiles
+    cd ~/dev/dotfiles && ./install.sh
 
 The script asks for a profile; to skip the prompt use `./install.sh --basic` or `./install.sh --full`. It is idempotent, and any existing file in the way is saved as `.bak` instead of deleted.
 
