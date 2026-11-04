@@ -41,3 +41,5 @@ end
 # ~/.local/bin (markitdown, etc.) en el PATH; fish_add_path no duplica entradas
 fish_add_path $HOME/.local/bin
 fish_add_path $HOME/bin
+# bun (el instalador solo lo añade a .bashrc)
+fish_add_path $HOME/.bun/bin
