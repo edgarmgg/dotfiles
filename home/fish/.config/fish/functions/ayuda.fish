@@ -13,7 +13,7 @@ function ayuda --description 'Lista mis funciones de fish con una línea de expl
     # Scripts de ~/.local/bin (no son funciones de fish): nombre y descripción a mano.
     # Al crear un script nuevo con -h, añádelo aquí.
     set -l scripts \
-        'calendario:Calendario de Edgar: sincroniza con el móvil y se edita por CLI' \
+        'calendario:Calendario de Edgar: sin argumentos abre la página; sincroniza con el móvil y se edita por CLI' \
         'copia:Copia de seguridad de mis archivos a Storage con rsync' \
         'cs:Gestor de sesiones de Claude en la terminal' \
         'newex:Crea el esqueleto .h / .cc / _main.cc de un ejercicio y su Makefile' \
