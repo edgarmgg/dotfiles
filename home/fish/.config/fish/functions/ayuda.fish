@@ -16,6 +16,7 @@ function ayuda --description 'Lista mis funciones de fish con una línea de expl
         'calendario:Calendario de Edgar: sin argumentos abre la página; sincroniza con el móvil y se edita por CLI' \
         'copia:Copia de seguridad de mis archivos a Storage con rsync' \
         'cs:Gestor de sesiones de Claude en la terminal' \
+        'dictar:Graba tu voz y la transcribe en local a un Markdown (atajo F9)' \
         'newex:Crea el esqueleto .h / .cc / _main.cc de un ejercicio y su Makefile' \
         'salud:Informe de salud del portátil' \
         'sysinfo:Información del sistema en texto plano' \
