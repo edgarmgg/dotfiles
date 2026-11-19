@@ -31,7 +31,6 @@ git
 github-cli
 greetd
 greetd-regreet
-greetd-tuigreet
 grim
 grub
 gst-plugin-pipewire
@@ -50,7 +49,6 @@ libvpl
 linux
 linux-firmware
 linux-firmware-liquidio
-ly
 lynis
 matugen
 mkinitcpio
@@ -87,7 +85,6 @@ reflector
 rsync
 rust
 scrcpy
-sddm
 slurp
 smartmontools
 sof-firmware

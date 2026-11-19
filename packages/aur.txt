@@ -1,8 +1,6 @@
 bibata-cursor-theme-bin
-dux-greeter-bin
 linux-wallpaperengine-v3-bin
 networkmanager-fortisslvpn
-sddm-astronaut-theme
 steamcmd
 tmatrix
 visual-studio-code-bin
