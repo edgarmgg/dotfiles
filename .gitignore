@@ -24,3 +24,15 @@ fish_variables
 *.pem
 *.key
 *.log
+
+# Privado: funciones fish del móvil, Pi, router y tele (ver config.fish)
+home/fish/.config/fish/functions-local/
+home/fish/.config/fish/completions-local/
+
+# mpv: scripts y fuentes de terceros (se instalan aparte)
+home/mpv/.config/mpv/scripts/uosc/
+home/mpv/.config/mpv/scripts/thumbfast.lua
+home/mpv/.config/mpv/fonts/
+
+# GRUB: valores propios de esta máquina
+grub/local.conf

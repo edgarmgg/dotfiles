@@ -1,0 +1,12 @@
+{
+    "id": "wsRow",
+    "name": "Cuadrícula de escritorios",
+    "description": "Cuadrícula 3x3 de escritorios de Hyprland: píldora de la columna actual y número de fila",
+    "version": "1.0.0",
+    "author": "Edgar",
+    "type": "widget",
+    "capabilities": ["dankbar-widget"],
+    "component": "./WsRowWidget.qml",
+    "icon": "grid_view",
+    "requires_dms": ">=1.7.0"
+}

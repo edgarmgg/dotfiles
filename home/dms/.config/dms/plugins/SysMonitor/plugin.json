@@ -1,0 +1,12 @@
+{
+    "id": "sysMonitor",
+    "name": "CPU y RAM",
+    "description": "CPU y RAM en un solo widget que abre la lista de procesos",
+    "version": "1.0.0",
+    "author": "Edgar",
+    "type": "widget",
+    "capabilities": ["dankbar-widget"],
+    "component": "./SysMonitorWidget.qml",
+    "icon": "memory",
+    "requires_dms": ">=1.7.0"
+}

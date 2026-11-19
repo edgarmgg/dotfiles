@@ -1,3 +1,8 @@
+# Funciones y completados privados (móvil, Pi, router, tele): viven en carpetas ignoradas por git, fuera del repo público
+set -l fish_local $HOME/.config/fish
+contains $fish_local/functions-local $fish_function_path; or set -a fish_function_path $fish_local/functions-local
+contains $fish_local/completions-local $fish_complete_path; or set -a fish_complete_path $fish_local/completions-local
+
 # Solo para shells interactivas (los scripts no cargan esto)
 if status is-interactive
     # Sin mensaje de bienvenida
@@ -6,16 +11,15 @@ if status is-interactive
     # Alias que se mantienen: solo añaden color y no merece la pena verlos expandidos
     alias ls 'ls --color=auto'
     alias grep 'grep --color=auto'
+    alias tmatrix 'command tmatrix --mode=dense -C cyan -c default --fade -s 10 -f 0.3,1 -l 6,35 -G 5,20 -g 0,25'
 
     # Abreviaturas: se expanden a la vista al pulsar espacio o Enter,
     # así ves y puedes editar el comando real (equivalen a ~/.bashrc y ~/.bash_aliases)
     abbr -a ll 'ls -alF'
     abbr -a la 'ls -A'
     abbr -a l 'ls -CF'
-    abbr -a update 'sudo apt update && sudo apt upgrade'
-    abbr -a autoremove 'sudo apt autoremove'
-    abbr -a vpnstatus 'forticlient vpn status'
-    abbr -a vpnoff 'forticlient vpn disconnect'
+    abbr -a update 'sudo pacman -Syu'
+    abbr -a autoremove 'sudo pacman -Rns (pacman -Qdtq)'
     abbr -a g++ 'g++ -std=c++17 -Wall -Wextra -Wpedantic -Wshadow -Wconversion'
     abbr -a .. 'cd ..'
     abbr -a ... 'cd ../..'
@@ -31,9 +35,9 @@ if status is-interactive
         starship init fish | source
     end
 
-    # zoxide: `z dir` salta al directorio más usado que coincida (aprende con cada cd)
+    # zoxide: `cd dir` salta al directorio más usado que coincida (aprende con cada cd); `cdi` es la versión interactiva (fzf)
     if command -q zoxide
-        zoxide init fish | source
+        zoxide init fish --cmd cd | source
     end
 end
 

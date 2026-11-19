@@ -1,0 +1,17 @@
+add_newline = false
+
+format = "$username$hostname$directory$git_branch$git_status$character"
+
+[username]
+show_always = true
+format = "[$user]($style)"
+style_user = "bold green"
+
+[hostname]
+ssh_only = false
+format = "[@thinkpad](bold green) "
+disabled = false
+
+[directory]
+truncation_length = 1
+truncate_to_repo = false

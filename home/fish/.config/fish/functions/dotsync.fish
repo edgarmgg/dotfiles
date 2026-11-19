@@ -1,6 +1,12 @@
-# Exporta ajustes de GNOME, enseña los cambios y los sube (pide confirmación)
+# Exporta paquetes y ajustes de DMS, enseña los cambios y los sube (pide confirmación)
 function dotsync --description 'Exporta y sube los dotfiles'
-    set -l repo $HOME/dev/dotfiles
+    if contains -- "$argv[1]" -h --help
+        echo 'uso: dotsync [mensaje de commit]'
+        echo '  Exporta las listas de paquetes y los ajustes de DMS al repo de dotfiles, enseña los cambios y, si confirmas, hace commit y push.'
+        echo '  Variable DOTFILES: ruta alternativa del repo.'
+        return 0
+    end
+    set -l repo $HOME/work/repos/config/dotfiles
     set -q DOTFILES; and set repo $DOTFILES
     test -d $repo; or begin
         echo "No existe $repo" >&2

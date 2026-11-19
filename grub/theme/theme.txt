@@ -1,0 +1,40 @@
+# Tema de GRUB con los colores de DMS (matugen): fondo #1a1b20, texto #e2e2e9, acento #adc6ff
+desktop-color: "#1a1b20"
+title-text: ""
+terminal-font: "JetBrainsMono NF Regular 16"
+
++ label {
+  left = 0
+  top = 12%
+  width = 100%
+  align = "center"
+  text = "Arch Linux"
+  font = "JetBrainsMono NF Regular 22"
+  color = "#adc6ff"
+}
+
++ boot_menu {
+  left = 30%
+  top = 28%
+  width = 40%
+  height = 40%
+  item_font = "JetBrainsMono NF Regular 22"
+  item_color = "#e2e2e9"
+  selected_item_font = "JetBrainsMono NF Regular 22"
+  selected_item_color = "#1a1b20"
+  item_height = 40
+  item_padding = 12
+  item_spacing = 8
+  selected_item_pixmap_style = "select_*.png"
+}
+
++ progress_bar {
+  id = "__timeout__"
+  left = 30%
+  top = 80%
+  width = 40%
+  height = 6
+  show_text = false
+  bar_style = "bar_*.png"
+  highlight_style = "hl_*.png"
+}

@@ -1,0 +1,12 @@
+{
+    "id": "wifiDbm",
+    "name": "Wifi dBm",
+    "description": "Señal de la wifi en dBm y porcentaje en la barra",
+    "version": "1.0.0",
+    "author": "Edgar",
+    "type": "widget",
+    "capabilities": ["dankbar-widget"],
+    "component": "./WifiDbmWidget.qml",
+    "icon": "wifi",
+    "requires_dms": ">=1.7.0"
+}

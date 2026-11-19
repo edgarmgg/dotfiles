@@ -1,0 +1,19 @@
+#!/bin/sh
+exec tail -n +3 $0
+# Entradas manuales. Para quitar Ubuntu en el futuro, borra su bloque.
+
+menuentry 'Windows 11' --class windows --class os {
+	insmod part_gpt
+	insmod fat
+	insmod chain
+	search --no-floppy --fs-uuid --set=root @EFI_UUID@
+	chainloader /EFI/Microsoft/Boot/bootmgfw.efi
+}
+
+menuentry 'Ubuntu' --class ubuntu --class gnu-linux --class os {
+	insmod part_gpt
+	insmod fat
+	insmod chain
+	search --no-floppy --fs-uuid --set=root @EFI_UUID@
+	chainloader /EFI/ubuntu/shimx64.efi
+}

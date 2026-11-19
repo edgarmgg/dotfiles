@@ -1,0 +1,11 @@
+{
+  "wifiDbm": {
+    "enabled": true
+  },
+  "sysMonitor": {
+    "enabled": true
+  },
+  "wsRow": {
+    "enabled": false
+  }
+}

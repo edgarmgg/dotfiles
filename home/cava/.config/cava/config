@@ -1,0 +1,33 @@
+[general]
+framerate = 60
+bars = 0
+bar_width = 2
+bar_spacing = 1
+sensitivity = 100
+
+[input]
+method = pipewire
+source = auto
+
+[output]
+method = noncurses
+channels = stereo
+reverse = 0
+
+[color]
+# Fondo transparente (el de la terminal) y degradado de cian oscuro a cian brillante
+background = default
+gradient = 1
+gradient_color_1 = '#0a6c8a'
+gradient_color_2 = '#1793d1'
+gradient_color_3 = '#2ab7d9'
+gradient_color_4 = '#4fd6e8'
+gradient_color_5 = '#7ae8f2'
+gradient_color_6 = '#a6f3f8'
+gradient_color_7 = '#cffafc'
+gradient_color_8 = '#ffffff'
+
+[smoothing]
+noise_reduction = 77
+monstercat = 1
+waves = 0

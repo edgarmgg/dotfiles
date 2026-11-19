@@ -55,9 +55,9 @@ if ! shopt -oq posix; then
 fi
 
 # ---------- Funciones ----------
-# Exporta ajustes de GNOME, enseña los cambios y los sube (pide confirmación)
+# Exporta paquetes y ajustes de DMS, enseña los cambios y los sube (pide confirmación)
 dotsync() {
-  local repo="${DOTFILES:-$HOME/dev/dotfiles}"
+  local repo="${DOTFILES:-$HOME/work/repos/config/dotfiles}"
   ( cd "$repo" || { echo "No existe $repo" >&2; exit 1; }
     ./install.sh export
     if [ -z "$(git status --porcelain)" ]; then
@@ -76,16 +76,6 @@ GTK_MODULES=${GTK_MODULES//::/:}
 GTK_MODULES=${GTK_MODULES#:}
 GTK_MODULES=${GTK_MODULES%:}
 export GTK_MODULES
-
-# ---------- Abrir tmux al iniciar una terminal ----------
-# Solo en terminales interactivas, fuera de tmux y fuera de Claude Code.
-# Sin "exec": si tmux falla (p. ej. error en ~/.tmux.conf) te quedas en bash.
-# Cada terminal tiene su propia sesión de tmux, independiente de las demás
-# (mismo servidor, así que tmux-resurrect ve todas). destroy-unattached la
-# elimina al cerrar la terminal.
-if command -v tmux >/dev/null && [ -z "$TMUX" ] && [ -z "$CLAUDECODE" ] && [ -t 0 ]; then
-  tmux new-session -s "t$$" \; set destroy-unattached on && exit
-fi
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
