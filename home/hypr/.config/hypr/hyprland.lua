@@ -14,7 +14,7 @@ hl.monitor({ output = "", mode = "preferred", position = "auto", scale = 1 })
 hl.on("hyprland.start", function()
     hl.exec_cmd("wl-paste --type text --watch cliphist store")
     hl.exec_cmd("wl-paste --type image --watch cliphist store")
-    hl.exec_cmd("linux-wallpaperengine --screen-root eDP-1 --bg /home/edgar/.local/share/wallpapers-fixed/3329133406 --scaling fill --silent --fps 30")   -- Wallpaper Engine: ASCII Lain in Static (copia corregida)
+    hl.exec_cmd(bin .. "fondos --aplicar eDP-1")   -- Wallpaper Engine: último fondo elegido con `fondos` (por defecto ASCII Lain)
 end)
 
 hl.env("XCURSOR_THEME", "Adwaita")
@@ -88,6 +88,8 @@ hl.bind(mainMod .. " + SPACE",      hl.dsp.exec_cmd("dms ipc call spotlight togg
 hl.bind(mainMod .. " + Super_L",    hl.dsp.exec_cmd("dms ipc call spotlight toggle"), { release = true })
 hl.bind(mainMod .. " + ALT + L",   hl.dsp.exec_cmd("dms ipc call lock lock"))
 hl.bind(mainMod .. " + V",          hl.dsp.exec_cmd("dms ipc call clipboard toggle"))
+hl.bind(mainMod .. " + B",          hl.dsp.exec_cmd(bin .. "fondos"))   -- selector de fondos de Wallpaper Engine
+hl.bind(mainMod .. " + SHIFT + B",  hl.dsp.exec_cmd(bin .. "workshop"))   -- web para buscar y bajar fondos del Workshop
 
 -- Ventanas
 hl.bind(mainMod .. " + Q",          hl.dsp.window.close())
@@ -146,10 +148,8 @@ hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(),   { mouse = true })
 hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
 -- Capturas
-local shots = "~/Pictures/Screenshots/Screenshot\\ from\\ $(date +'%Y-%m-%d\\ %H-%M-%S').png"
-hl.bind("Print",           hl.dsp.exec_cmd("grim -g \"$(slurp)\" - | tee " .. shots .. " | wl-copy -t image/png"))
-hl.bind("CTRL + Print",    hl.dsp.exec_cmd("grim - | tee " .. shots .. " | wl-copy -t image/png"))
-hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd(bin .. "recortar-pantalla"))
+hl.bind("Print",           hl.dsp.exec_cmd(bin .. "recortar-pantalla --todo"))  -- Fn+F9 del ThinkPad parece mandar Print
+hl.bind("XF86SelectiveScreenshot", hl.dsp.exec_cmd(bin .. "recortar-pantalla --editar"))  -- Fn+F10 del ThinkPad
 hl.bind(mainMod .. " + F9",         hl.dsp.exec_cmd(bin .. "recortar-pantalla --todo"))
 
 -- Cheatsheet de atajos (script ~/.local/bin/atajos)
