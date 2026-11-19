@@ -6,4 +6,3 @@ tmatrix
 visual-studio-code-bin
 yay-bin
 yay-bin-debug
-ytermusic-bin

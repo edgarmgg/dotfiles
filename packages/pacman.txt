@@ -76,6 +76,7 @@ polkit-gnome
 polkit-kde-agent
 power-profiles-daemon
 prismlauncher
+python-pillow
 python-rich
 qbittorrent
 qt5-wayland
@@ -132,6 +133,7 @@ vulkan-nouveau
 vulkan-radeon
 waybar
 weston
+wev
 wget
 wireplumber
 wl-clipboard
