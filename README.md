@@ -33,7 +33,7 @@ The script is idempotent, and any existing file in the way is saved as `.bak.<da
 - Hyprland is configured in Lua (`home/hypr/.config/hypr/hyprland.lua`). The files in `hypr/dms/` are written by DMS and may be replaced by it.
 - DMS keeps its own settings and its folder has an ACL for the greeter, so `home/dms` is copied (`dms` and `export` steps), not linked.
 - mpv: `uosc` and `thumbfast` are third-party and not in the repo; install them separately.
-- GRUB: Arch boots through a UKI (`15_uki`), and Windows and Ubuntu are chainloaded from `40_custom`. Put the UUID of their EFI partition in `grub/local.conf` (`EFI_UUID=...`, ignored by git). `./install.sh grub` copies everything but does not regenerate the menu: run `sudo grub-mkconfig -o /boot/grub/grub.cfg` afterwards.
+- GRUB: Arch boots through a UKI (`15_uki`), and Windows is chainloaded from `40_custom`. Put the UUID of its EFI partition in `grub/local.conf` (`EFI_UUID=...`, ignored by git). `./install.sh grub` copies everything but does not regenerate the menu: run `sudo grub-mkconfig -o /boot/grub/grub.cfg` afterwards.
 - Private data stays out of the repo: `~/.bash_aliases.local` (bash), `~/.config/fish/local.fish` (fish), `~/.ssh/config.local` (ssh), `~/.vim/email.local` (vim) and `~/.config/fish/functions-local/` with its completions (phone, Raspberry Pi, router and TV helpers).
 - `dotsync` exports the package lists and DMS settings, then asks before committing and pushing. The repo path comes from `$DOTFILES`.
 

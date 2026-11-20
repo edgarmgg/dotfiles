@@ -110,7 +110,7 @@ step_vimplug() {
 
 # Solo bajo demanda (pide sudo). No regenera grub.cfg: eso lo haces tú.
 step_grub() {
-  [[ -f grub/local.conf ]] || die "falta grub/local.conf con EFI_UUID=<uuid de la EFI de Windows y Ubuntu> (blkid)"
+  [[ -f grub/local.conf ]] || die "falta grub/local.conf con EFI_UUID=<uuid de la EFI de Windows> (blkid)"
   # shellcheck source=/dev/null
   source grub/local.conf
   [[ -n ${EFI_UUID:-} ]] || die "EFI_UUID vacío en grub/local.conf"
