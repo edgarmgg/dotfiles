@@ -1,0 +1,7 @@
+[[plugin.deps]]
+use = "yazi-rs/plugins:mount"
+rev = "1ef5fe0"
+hash = "f0dcc0ea71d5c59ce0d527f4b8a3937b"
+
+[flavor]
+deps = []

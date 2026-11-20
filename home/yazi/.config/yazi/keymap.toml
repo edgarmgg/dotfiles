@@ -1,0 +1,4 @@
+[[mgr.prepend_keymap]]
+on   = "M"
+run  = "plugin mount"
+desc = "Montar y desmontar discos"
