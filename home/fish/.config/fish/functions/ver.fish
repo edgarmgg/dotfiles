@@ -5,9 +5,10 @@
 #   ver                menú interactivo (fzf): flechas o escribir para filtrar, Enter reproduce
 #   -i/--inicio        empieza desde el primer episodio aunque ya lo hayas visto
 #   -s/--serie NOMBRE  busca solo entre las temporadas de esa serie
+#   -l/--lista [texto] lista la biblioteca: vistos y por dónde sigue cada serie
 # Qué carpeta es qué se define en ~/.config/biblioteca.conf.
 function ver --description 'Busca en la biblioteca (pelis y series) y lo reproduce en mpv'
-    argparse h/help i/inicio 's/serie=' -- $argv; or return 1
+    argparse h/help i/inicio l/lista 's/serie=' -- $argv; or return 1
     if set -q _flag_help
         echo 'uso: ver [-i] [búsqueda...] [tN]'
         echo '  ver                menú: Pelis o Series (flechas o escribir para filtrar, ".." vuelve atrás)'
@@ -16,8 +17,13 @@ function ver --description 'Busca en la biblioteca (pelis y series) y lo reprodu
         echo '  ver <serie> t2     temporada 2 de la serie (también s2, T02...)'
         echo '  -i, --inicio       empieza desde el primer episodio aunque ya lo hayas visto'
         echo '  -s, --serie NOMBRE busca solo entre las temporadas de esa serie'
+        echo '  -l, --lista [texto] lista la biblioteca: vistos y por dónde sigue cada serie'
         echo '  -h, --help         muestra esta ayuda'
         return 0
+    end
+    if set -q _flag_lista
+        ~/.local/bin/mpv-remote --lista $argv; or echo "Nada coincide con: $argv"
+        return
     end
     set -l all (_ver_items); or return 1
     set -l items $all
@@ -283,54 +289,23 @@ function _ver_play_number --argument-names inicio num
     _ver_play_season $inicio $f[2] "$f[3] › $f[4]"
 end
 
-# Serie entera: sigue por el episodio siguiente al último que terminaste (el más
-# reciente de watched.txt) saltando los ya vistos; sin historial, el primero sin ver.
+# Serie entera: por dónde ibas lo decide `mpv-remote --continuar` (la misma lógica que el
+# botón Continuar del mando: sigue al último episodio terminado y deja los especiales para
+# el final); con inicio=1, desde el primer episodio.
 function _ver_play_show --argument-names inicio
     set -l seasons $argv[2..-1]
-    # Todos los episodios seguidos, y de qué temporada es cada uno
-    set -l episodes
-    set -l owner
-    for i in (seq (count $seasons))
-        for ep in (_ver_videos (string split \t -- $seasons[$i])[2])
-            set -a episodes $ep
-            set -a owner $i
-        end
+    set -q seasons[1]; or return 1
+    set -l args --continuar (string split \t -- $seasons[1])[2]
+    test $inicio -eq 1; and set -a args --inicio
+    set -l pick (string split \t -- (~/.local/bin/mpv-remote $args)); or return 1
+    for item in $seasons
+        set -l f (string split \t -- $item)
+        test $f[2] = $pick[1]; or continue
+        set -l in_season (_ver_videos $f[2])
+        _ver_mpv (contains -i -- $pick[2] $in_season) "$f[3] › $f[4]" $in_season
+        return
     end
-    set -q episodes[1]; or return 1
-    set -l watched (cat ~/.local/state/mpv/watched.txt 2>/dev/null)
-
-    set -l target 1
-    if test $inicio -eq 0
-        set -l last 0
-        for line in $watched[-1..1]
-            set -l pos (contains -i -- $line $episodes); and set last $pos; and break
-        end
-        set target 0
-        for i in (seq (math $last + 1) (count $episodes))
-            if not contains -- $episodes[$i] $watched
-                set target $i
-                break
-            end
-        end
-        if test $target -eq 0 -a $last -gt 0
-            # Lo siguiente está todo visto: el primero sin ver de antes
-            for i in (seq $last)
-                if not contains -- $episodes[$i] $watched
-                    set target $i
-                    break
-                end
-            end
-        end
-        if test $target -eq 0
-            echo "Serie terminada: empiezo desde el principio"
-            set target 1
-        end
-    end
-
-    set -l s $owner[$target]
-    set -l f (string split \t -- $seasons[$s])
-    set -l in_season (_ver_videos $f[2])
-    _ver_mpv (contains -i -- $episodes[$target] $in_season) "$f[3] › $f[4]" $in_season
+    return 1
 end
 
 # Lanza mpv con la temporada como lista, empezando en el episodio start (desde 1).
@@ -342,4 +317,5 @@ function _ver_mpv --argument-names start label
 end
 
 complete -c ver -f -s i -l inicio -d 'Empezar desde el primer episodio'
+complete -c ver -f -s l -l lista -d 'Listar la biblioteca'
 complete -c ver -f -a '(_ver_items 2>/dev/null | string split -f4 \t | sort -u)'
