@@ -14,7 +14,7 @@ hl.monitor({ output = "", mode = "preferred", position = "auto", scale = 1 })
 hl.on("hyprland.start", function()
     hl.exec_cmd("wl-paste --type text --watch cliphist store")
     hl.exec_cmd("wl-paste --type image --watch cliphist store")
-    hl.exec_cmd(bin .. "fondos --aplicar eDP-1")   -- Wallpaper Engine: último fondo elegido con `fondos` (por defecto ASCII Lain)
+    hl.exec_cmd(bin .. "fondos --arranque eDP-1")   -- Wallpaper Engine: último fondo elegido con `fondos` (por defecto ASCII Lain)
 end)
 
 hl.env("XCURSOR_THEME", "Adwaita")
