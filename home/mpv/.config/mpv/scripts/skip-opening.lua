@@ -1,5 +1,5 @@
 -- Salta el opening de cualquier vídeo que lo tenga como capítulo: vale cualquier
--- capítulo cuyo título contenga "opening" (One Pace los marca así).
+-- capítulo cuyo título contenga "opening" (One Pace los marca así) o sea exactamente "OP".
 -- Tecla S: salta al final del opening si estás dentro de él.
 -- Tecla Ctrl+s: activa/desactiva el salto automático al llegar al opening.
 local auto = false
@@ -7,7 +7,8 @@ local auto = false
 local function opening_end()
   local chapters = mp.get_property_native("chapter-list") or {}
   for i, ch in ipairs(chapters) do
-    if (ch.title or ""):lower():find("opening", 1, true) then
+    local title = (ch.title or ""):lower()
+    if title:find("opening", 1, true) or title == "op" then
       local next_ch = chapters[i + 1]
       local stop = next_ch and next_ch.time or mp.get_property_number("duration")
       return ch.time, stop
