@@ -50,3 +50,7 @@ fish_add_path $HOME/.bun/bin
 # done.fish: un comando terminado con SIGTERM (143), p. ej. `claude` cerrado desde cs, no es un fallo:
 # se avisa como "Cerrado" y con urgencia normal. El resto se avisa como siempre.
 set -g __done_notification_command 'set -l urgency normal; if test $exit_status -eq 143; set title "Cerrado después de $humanized_duration"; else if test $exit_status -ne 0; set urgency critical; end; notify-send --hint=int:transient:1 --urgency=$urgency --icon=utilities-terminal --app-name=fish --expire-time=$__done_notification_duration "$title" "$message"'
+
+# Editor por defecto (Yazi, git, etc. lo leen de aquí; sin esto caen a vim).
+set -gx EDITOR nvim
+set -gx VISUAL nvim
