@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Neovim
+Comment=Editor de texto en kitty
+Exec=kitty --title Neovim nvim %f
+Icon=nvim
+Terminal=false
+MimeType=text/plain;text/markdown;
+Categories=Utility;TextEditor;
