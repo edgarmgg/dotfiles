@@ -4,8 +4,5 @@
   },
   "sysMonitor": {
     "enabled": true
-  },
-  "wsRow": {
-    "enabled": false
   }
 }
