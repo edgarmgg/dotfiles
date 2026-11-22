@@ -16,3 +16,6 @@ opt.shiftwidth = 2
 
 -- Swap y undo: no se tocan. Neovim ya los guarda en ~/.local/state/nvim
 -- (fuera de los proyectos) y no conviene compartir esos ficheros con Vim.
+
+-- Corrector ortográfico en inglés y español (LazyVim lo activa en md/txt/gitcommit)
+opt.spelllang = { "en", "es" }
