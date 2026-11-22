@@ -9,3 +9,13 @@ linemode       = "size"
 [preview]
 max_width  = 1200
 max_height = 1800
+
+[[plugin.prepend_fetchers]]
+group = "git"
+url  = "*"
+run  = "git"
+
+[[plugin.prepend_fetchers]]
+group = "git"
+url  = "*/"
+run  = "git"
