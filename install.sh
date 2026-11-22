@@ -2,7 +2,6 @@
 # Deja Arch + Hyprland con mi configuración.
 #   ./install.sh                 paquetes, enlaces, plugins y DMS
 #   ./install.sh stow dms        solo esos pasos
-#   ./install.sh grub            GRUB (pide sudo; hay que hacerlo a propósito)
 #   ./install.sh export          guarda en el repo las listas de paquetes y los ajustes de DMS
 set -euo pipefail
 
@@ -11,15 +10,12 @@ cd "$REPO"
 
 # ---------------------------- Configuración ----------------------------
 # Un paquete de stow por herramienta (home/<paquete>)
-STOW_PKGS=(bash git vim nvim tmux fish ssh cava fastfetch yazi hypr kitty fuzzel btop mpv starship)
+STOW_PKGS=(bash git vim nvim tmux fish ssh cava fastfetch yazi hypr kitty fuzzel btop starship)
 DEFAULT_STEPS=(pacman aur stow dms tpm fisher vimplug)
 
 # DMS reescribe sus ficheros y su carpeta tiene ACL para el greeter: se copia, no se enlaza
 DMS_SRC="home/dms/.config/dms"
 DMS_DST="$HOME/.config/dms"
-
-GRUB_ETC=/etc/grub.d
-GRUB_THEME_DST=/boot/grub/themes/edgar
 
 # ------------------------------ Utilidades -----------------------------
 log()  { printf '\n\033[1;35m==> %s\033[0m\n' "$*"; }
@@ -69,7 +65,6 @@ step_aur() {
 step_stow() {
   stow_pkgs home "${STOW_PKGS[@]}"
   if [[ -d $HOME/.ssh ]]; then chmod 700 "$HOME/.ssh"; fi
-  info "mpv: uosc y thumbfast no están en el repo; se instalan aparte (ver README)"
 }
 
 step_dms() {
@@ -108,31 +103,6 @@ step_vimplug() {
   info "vim-plug y plugins listos"
 }
 
-# Solo bajo demanda (pide sudo). No regenera grub.cfg: eso lo haces tú.
-step_grub() {
-  [[ -f grub/local.conf ]] || die "falta grub/local.conf con EFI_UUID=<uuid de la EFI de Windows> (blkid)"
-  # shellcheck source=/dev/null
-  source grub/local.conf
-  [[ -n ${EFI_UUID:-} ]] || die "EFI_UUID vacío en grub/local.conf"
-
-  [[ -f /etc/default/grub.bak ]] || sudo cp /etc/default/grub /etc/default/grub.bak
-  sudo install -m 644 grub/default-grub /etc/default/grub
-
-  sudo install -m 755 grub/entries/15_uki "$GRUB_ETC/15_uki"
-  sed "s/@EFI_UUID@/$EFI_UUID/" grub/entries/40_custom.in | sudo tee "$GRUB_ETC/40_custom" >/dev/null
-  sudo chmod 755 "$GRUB_ETC/40_custom"
-  # Arch arranca por UKI (15_uki): 10_linux y 31_efi_bootnext sin permiso de ejecución es intencionado
-  sudo chmod -x "$GRUB_ETC/10_linux" "$GRUB_ETC/31_efi_bootnext" 2>/dev/null || true
-
-  if [[ -d grub/theme ]]; then
-    sudo mkdir -p "$GRUB_THEME_DST"
-    sudo cp -r grub/theme/. "$GRUB_THEME_DST"/
-  else
-    warn "falta grub/theme (copia de $GRUB_THEME_DST); sin ella GRUB_THEME apunta a nada"
-  fi
-  info "Hecho. Falta: sudo grub-mkconfig -o /boot/grub/grub.cfg"
-}
-
 # Solo bajo demanda: guarda en el repo lo que tienes ahora
 step_export() {
   pacman -Qqen > packages/pacman.txt
@@ -141,7 +111,11 @@ step_export() {
   if [[ -d $DMS_DST ]]; then
     mkdir -p "$DMS_SRC/plugins"
     cp "$DMS_DST/settings.json" "$DMS_DST/plugin_settings.json" "$DMS_SRC"/
-    cp -r "$DMS_DST/plugins/." "$DMS_SRC/plugins"/
+    local p
+    for p in "$DMS_SRC"/plugins/*/; do   # solo los plugins que ya están en el repo
+      p=$(basename "$p")
+      [[ -d $DMS_DST/plugins/$p ]] && cp -rL "$DMS_DST/plugins/$p/." "$DMS_SRC/plugins/$p"/
+    done
     info "exportado DMS"
   fi
 }
