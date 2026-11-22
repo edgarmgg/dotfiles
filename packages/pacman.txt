@@ -1,3 +1,4 @@
+7zip
 amd-ucode
 android-tools
 arch-audit
@@ -83,6 +84,7 @@ qt5-wayland
 qt6-wayland
 qt6ct
 reflector
+ripgrep
 rsync
 rust
 scrcpy
